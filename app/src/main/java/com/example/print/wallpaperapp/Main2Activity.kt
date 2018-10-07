@@ -45,11 +45,11 @@ class Main2Activity : AppCompatActivity() {
             var builder = AlertDialog.Builder(this@Main2Activity)
             builder.setTitle("")
             builder.setMessage("คุณยืนยันจะใช้รูปนี้เป็นพื้นหลังใช่ไหม ")
-            builder.setPositiveButton("ใช่"){dialog,which ->
+            builder.setPositiveButton("ใช่"){_,_ ->
                 wallpaperManage.setResource(photo.picture)
                 Toast.makeText(this,"Set Success ", Toast.LENGTH_LONG).show()
             }
-            builder.setNegativeButton("ไม่"){dialog,which ->
+            builder.setNegativeButton("ไม่"){_,_ ->
             }
             val dialog: AlertDialog = builder.create()
             dialog.show()
