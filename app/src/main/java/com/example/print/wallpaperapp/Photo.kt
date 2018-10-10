@@ -10,10 +10,12 @@ data class Photo(val picture : Int): Parcelable{
 
         fun getCarToonPhotos(): ArrayList<Photo>{
             return arrayListOf(Photo(R.drawable.arena),
-                    Photo(R.drawable.arduin_2))
+                    Photo(R.drawable.arduin_2),Photo(R.drawable.ardin),
+                    Photo(R.drawable.astrid))
         }
         fun getGalleryPhoto() : ArrayList<Photo>{
-            return arrayListOf(Photo(R.drawable.ardin))
+            return arrayListOf(Photo(R.drawable.grakk),
+                    Photo(R.drawable.joker),Photo(R.drawable.lllumia))
         }
         fun getLikePhoto(): ArrayList<Photo>{
            return listLike
