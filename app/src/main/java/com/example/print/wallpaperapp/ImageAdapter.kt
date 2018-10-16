@@ -15,9 +15,10 @@ import java.util.*
 
 class ImageAdapter (val items : ArrayList<Photo>, val context: Context) : RecyclerView.Adapter<ImageAdapter.CardViewHolder>()
     {
+        var  coutClick:Int=0
         var mInterstitialAd : InterstitialAd?=null
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-            var holder = CardViewHolder(LayoutInflater.from(context).inflate(R.layout.card_image,parent,false))
+            val holder = CardViewHolder(LayoutInflater.from(context).inflate(R.layout.card_image,parent,false))
             return holder
         }
 
@@ -33,7 +34,6 @@ class ImageAdapter (val items : ArrayList<Photo>, val context: Context) : Recycl
         }
 
         inner class CardViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-
             var  imageView = itemView?.findViewById<ImageView>(R.id.iv_photo)
 
             init {
@@ -41,13 +41,13 @@ class ImageAdapter (val items : ArrayList<Photo>, val context: Context) : Recycl
             }
 
             override fun onClick(view: View?) {
+                coutClick++
                 val position = adapterPosition
                 if(position!=RecyclerView.NO_POSITION){
                     val Photo = items[position]
                     val intent:Intent = Intent(context,Main2Activity::class.java).apply {
                         putExtra(Main2Activity.EXTRA_PHOTO,Photo)
                     }
-                    context.startActivity(intent)
 
                     mInterstitialAd = InterstitialAd(context)
                     mInterstitialAd?.adUnitId = "ca-app-pub-8549639420372799/1967421820"
@@ -55,11 +55,24 @@ class ImageAdapter (val items : ArrayList<Photo>, val context: Context) : Recycl
                     mInterstitialAd?.adListener = object :AdListener(){
                         override fun onAdLoaded() {
                             super.onAdLoaded()
-                            mInterstitialAd?.show()
+                            if(coutClick==4){
+                                coutClick=0
+                                mInterstitialAd?.show()
+                            }else{
+                                context.startActivity(intent)
+
+                            }
                         }
+
+                        override fun onAdClosed() {
+                            super.onAdClosed()
+                            context.startActivity(intent)
+
+                        }
+
                     }
 
-                    mInterstitialAd?.show()
+
                 }
 
             }

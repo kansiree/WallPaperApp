@@ -37,7 +37,6 @@ class Cartoon : Fragment() {
         val layoutManager = GridLayoutManager(context,2)
         list_cartoon.setHasFixedSize(true)
         list_cartoon.layoutManager = layoutManager
-        var adapter =list_cartoon.adapter
         list_cartoon.adapter = ImageAdapter(Photo.getCarToonPhotos(), this.context!!)
 
         }
